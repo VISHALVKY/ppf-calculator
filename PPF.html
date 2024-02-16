@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PPF Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: lightslategray;
+    }
+    #container {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        text-align: center;
+    }
+    h2 {
+        margin-bottom: 20px;
+        color: #333;
+    }
+    label {
+        display: inline-block;
+        width: 200px;
+        text-align: left;
+        margin-bottom: 10px;
+        color: #555;
+    }
+    input[type="number"] {
+        width: 200px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+    button:hover {
+        background-color: #45a049;
+    }
+    #result {
+        margin-top: 20px;
+        font-size: 18px;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <h2>PPF Calculator</h2>
+    <label for="investment">Investment Amount (₹):</label>
+    <input type="number" id="investment" placeholder="Enter investment amount"><br><br>
+    <label for="tenure">Investment Tenure (years):</label>
+    <input type="number" id="tenure" placeholder="Enter investment tenure"><br><br>
+    <button onclick="calculate()">Calculate</button><br><br>
+    <div id="result"></div>
+</div>
+
+<script>
+    function calculate() {
+        var investment = parseFloat(document.getElementById("investment").value);
+        var tenure = parseFloat(document.getElementById("tenure").value);
+
+        if (isNaN(investment) || isNaN(tenure)) {
+            document.getElementById("result").innerHTML = "Please enter valid input";
+            return;
+        }
+
+        var interestRate = 7.1; // Current PPF interest rate for 2022-23
+        var maturityAmount = investment;
+
+        for (var i = 1; i <= tenure; i++) {
+            maturityAmount += (maturityAmount * interestRate) / 100;
+        }
+
+        document.getElementById("result").innerHTML = "Maturity Amount: ₹" + maturityAmount.toFixed(2);
+    }
+</script>
+</body>
+</html>
